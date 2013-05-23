@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  perma: MyString
+  crunch_url: MyString
+  home_url: MyString
+
+two:
+  name: MyString
+  perma: MyString
+  crunch_url: MyString
+  home_url: MyString

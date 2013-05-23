@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Company:</b>
+  <%= @funding.company_id %>
+</p>
+
+<p>
+  <b>Company perma:</b>
+  <%= @funding.company_perma %>
+</p>
+
+<p>
+  <b>Funding code:</b>
+  <%= @funding.funding_code %>
+</p>
+
+<p>
+  <b>Funding amount:</b>
+  <%= @funding.funding_amount %>
+</p>
+
+<p>
+  <b>Funding currency:</b>
+  <%= @funding.funding_currency %>
+</p>
+
+<p>
+  <b>Funding date:</b>
+  <%= @funding.funding_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_funding_path(@funding) %> |
+<%= link_to 'Back', fundings_path %>

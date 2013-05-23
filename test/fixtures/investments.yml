@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  funding_id: 1
+  investor_perma: MyString
+  investor_id: 1
+
+two:
+  funding_id: 1
+  investor_perma: MyString
+  investor_id: 1

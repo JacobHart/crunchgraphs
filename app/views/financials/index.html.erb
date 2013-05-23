@@ -1,0 +1,31 @@
+<h1>Listing financials</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Perma</th>
+    <th>Crunch url</th>
+    <th>Home url</th>
+    <th>Founded date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @financials.each do |financial| %>
+  <tr>
+    <td><%= financial.name %></td>
+    <td><%= financial.perma %></td>
+    <td><%= financial.crunch_url %></td>
+    <td><%= financial.home_url %></td>
+    <td><%= financial.founded_date %></td>
+    <td><%= link_to 'Show', financial %></td>
+    <td><%= link_to 'Edit', edit_financial_path(financial) %></td>
+    <td><%= link_to 'Destroy', financial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Financial', new_financial_path %>

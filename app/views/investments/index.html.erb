@@ -1,0 +1,27 @@
+<h1>Listing investments</h1>
+
+<table>
+  <tr>
+    <th>Funding</th>
+    <th>Investor perma</th>
+    <th>Investor</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @investments.each do |investment| %>
+  <tr>
+    <td><%= investment.funding_id %></td>
+    <td><%= investment.investor_perma %></td>
+    <td><%= investment.investor_id %></td>
+    <td><%= link_to 'Show', investment %></td>
+    <td><%= link_to 'Edit', edit_investment_path(investment) %></td>
+    <td><%= link_to 'Destroy', investment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Investment', new_investment_path %>

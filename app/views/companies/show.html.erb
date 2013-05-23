@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @company.name %>
+</p>
+
+<p>
+  <b>Perma:</b>
+  <%= @company.perma %>
+</p>
+
+<p>
+  <b>Industry:</b>
+  <%= @company.industry_id %>
+</p>
+
+<p>
+  <b>Crunch url:</b>
+  <%= @company.crunch_url %>
+</p>
+
+<p>
+  <b>Home url:</b>
+  <%= @company.home_url %>
+</p>
+
+<p>
+  <b>Founded date:</b>
+  <%= @company.founded_date %>
+</p>
+
+<p>
+  <b>Dead date:</b>
+  <%= @company.dead_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

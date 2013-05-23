@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @financial.name %>
+</p>
+
+<p>
+  <b>Perma:</b>
+  <%= @financial.perma %>
+</p>
+
+<p>
+  <b>Crunch url:</b>
+  <%= @financial.crunch_url %>
+</p>
+
+<p>
+  <b>Home url:</b>
+  <%= @financial.home_url %>
+</p>
+
+<p>
+  <b>Founded date:</b>
+  <%= @financial.founded_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_financial_path(@financial) %> |
+<%= link_to 'Back', financials_path %>

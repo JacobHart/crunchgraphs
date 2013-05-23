@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  perma: MyString
+  industry_id: 1
+  crunch_url: MyString
+  home_url: MyString
+  founded_date: 2013-05-22
+  dead_date: 2013-05-22
+
+two:
+  name: MyString
+  perma: MyString
+  industry_id: 1
+  crunch_url: MyString
+  home_url: MyString
+  founded_date: 2013-05-22
+  dead_date: 2013-05-22

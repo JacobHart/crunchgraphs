@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @individual.name %>
+</p>
+
+<p>
+  <b>Perma:</b>
+  <%= @individual.perma %>
+</p>
+
+<p>
+  <b>Crunch url:</b>
+  <%= @individual.crunch_url %>
+</p>
+
+<p>
+  <b>Home url:</b>
+  <%= @individual.home_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_individual_path(@individual) %> |
+<%= link_to 'Back', individuals_path %>
