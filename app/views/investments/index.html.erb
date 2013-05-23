@@ -3,8 +3,12 @@
 <table>
   <tr>
     <th>Funding</th>
-    <th>Investor perma</th>
-    <th>Investor</th>
+    <th>Company perma</th>
+    <th>Company Id</th>
+    <th>Financial perma</th>
+    <th>Financial ID</th>
+    <th>Individual perma</th>
+    <th>Individual ID</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,8 +17,12 @@
 <% @investments.each do |investment| %>
   <tr>
     <td><%= investment.funding_id %></td>
-    <td><%= investment.investor_perma %></td>
-    <td><%= investment.investor_id %></td>
+    <td><%= investment.company_perma %></td>
+    <td><%= investment.company_id %></td>
+    <td><%= investment.financial_perma %></td>
+    <td><%= investment.financial_id %></td>
+    <td><%= investment.individual_perma %></td>
+    <td><%= investment.individual_id %></td>
     <td><%= link_to 'Show', investment %></td>
     <td><%= link_to 'Edit', edit_investment_path(investment) %></td>
     <td><%= link_to 'Destroy', investment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

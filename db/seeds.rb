@@ -21,7 +21,7 @@ companies =
 # Individual Permalinks
 individuals =
 [
-'peter-thiel', 'dave-mcclure', 'kevin-rose', 'jack-dorsey', 'david-tisch', 'elon-musk', 'ron-conway', 'reid-hoffman', 'dave-morin'
+'peter-thiel', 'dave-mcclure', 'kevin-rose', 'jack-dorsey', 'david-tisch', 'elon-musk', 'ron-conway', 'reid-hoffman', 'dave-morin', 'mark-pincus'
 ]
 # Venture Capital Permalinks
 vcs =
@@ -36,6 +36,7 @@ Individual.destroy_all
 Financial.destroy_all
 Investment.destroy_all
 Funding.destroy_all
+Location.destroy_all
 
 # Have an issue because something like techstars y-combinator is classified as a company
 # This probably shouldn't be a problem when we loop through each company and
@@ -138,10 +139,27 @@ puts "There are #{Financial.all.count} financials in the database"
       end
 
 
+
+
+
 c.save
+
+      l = Location.new
+      l.address1 = company_data['offices'][0]['address1']
+      l.address2 = company_data['offices'][0]['address12']
+      l.zipcode = company_data['offices'][0]['zip_code']
+      l.city = company_data['offices'][0]['city']
+      l.statecode = company_data['offices'][0]['state_code']
+      l.countrycode = company_data['offices'][0]['country_code']
+      l.latitude = company_data['offices'][0]['latitude']
+      l.longitude = company_data['offices'][0]['longitude']
+      l.description = company_data['offices'][0]['description']
+      l.company_id = c.id
+      l.save
 
 puts "There are #{Company.all.count} companies in the database"
 puts "There are #{Industry.all.count} industries in the database"
+puts "There are #{Location.all.count} locations in the database"
 
 
 
@@ -173,42 +191,36 @@ puts "There are #{Industry.all.count} industries in the database"
             # Need to include funding_round_id when seeding
             i = Investment.new
             i.funding_id = f.id
-            i.investor_id = nil # use nil for now
-            i.investor_perma= investment["company"]["permalink"]
+            i.company_perma = investment["company"]["permalink"]
+            i.company_id = nil #Company.find_by_perma(i.company_perma).id
             i.save
-            puts "There are #{Investment.all.count} investments in the database"
-
 
           elsif investment["financial_org"] != nil
             # Need to include funding_round_id when seeding
             i = Investment.new
-            i.investor_id = nil # use nil for now
             i.funding_id = f.id
-            i.investor_perma = investment["financial_org"]["permalink"]
+            i.financial_perma = investment["financial_org"]["permalink"]
+            i.financial_id = nil #Financial.find_by_perma(i.financial_perma).id
             i.save
-            puts "There are #{Investment.all.count} investments in the database"
-
 
           elsif investment["person"] != nil
             # Need to include funding_round_id when seeding
             i = Investment.new
-            i.investor_id = nil # use nil for now
             i.funding_id = f.id
-            i.investor_perma = investment["person"]["permalink"]
+            i.individual_perma = investment["person"]["permalink"]
+            i.individual_id = nil #Individual.find_by_perma(i.individual_perma).id
             i.save
-            puts "There are #{Investment.all.count} investments in the database"
-
 
           else
             # If there is a situation where there is a round but don't know who invested
             # Need to include funding_round_id when seeding
-            i = Investment.new
-            i.investor_id = nil
-            i.funding_id = f.id
-            i.investor_perma = "unattributed"
-            i.save
+            # i = Investment.new
+            # i.funding_id = f.id
+            # i.investor_id = nil
+            # i.company_perma = "unattributed"
+            # i.save
           end
-
+          puts "There are #{Investment.all.count} investments in the database"
         end
 
 

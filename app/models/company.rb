@@ -4,5 +4,6 @@ class Company < ActiveRecord::Base
   belongs_to :industry
   has_many :investments
   has_many :fundings
+  has_one :location
 
 end

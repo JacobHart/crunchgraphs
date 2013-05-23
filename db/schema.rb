@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523034509) do
+ActiveRecord::Schema.define(:version => 20130523225319) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -63,10 +63,29 @@ ActiveRecord::Schema.define(:version => 20130523034509) do
 
   create_table "investments", :force => true do |t|
     t.integer  "funding_id"
-    t.string   "investor_perma"
-    t.integer  "investor_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "company_perma"
+    t.integer  "company_id"
+    t.string   "financial_perma"
+    t.integer  "financial_id"
+    t.string   "individual_perma"
+    t.integer  "individual_id"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "zipcode"
+    t.string   "city"
+    t.string   "statecode"
+    t.string   "countrycode"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "company_id"
+    t.string   "description"
   end
 
 end
