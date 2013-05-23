@@ -3,8 +3,21 @@
 <p>
   <b>Name:</b>
   <%= @industry.name %>
+
+
 </p>
 
+<% @industry.companies.each do |f| %>
 
+<ul>
+  <li><%= f.name %></li>
+      <% f.fundings.where(funding_code: 'a').each do |g|  %>
+      <ul>
+        <li><%= g.funding_code %>: <%= g.funding_amount %></li>
+      </ul>
+      <% end  %>
+
+</ul>
+<% end  %>
 <%= link_to 'Edit', edit_industry_path(@industry) %> |
 <%= link_to 'Back', industries_path %>
