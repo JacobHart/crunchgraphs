@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'json'
+require 'date'
 
 start_time = Time.now
 
@@ -95,11 +96,6 @@ end
 puts "There are #{Financial.all.count} financials in the database"
 
 # -------------------------------- Company Seeding --------------------------------- #
-# !!!!!!!!! Note we need to figure out how to do locations !!!!!!!! Separate Table?
-# puts company_data["offices"]
-
-
-
 
   companies.each_index do |i|
 
@@ -125,21 +121,32 @@ puts "There are #{Financial.all.count} financials in the database"
       # Logic in case the company is dead
       if company_data["deadpooled_year"] == nil
         c.dead_date = nil
+      elsif company_data["deadpooled_month"] == nil
+        c.dead_date = Date.new(company_data["deadpooled_year"])
       else
-        c.dead_date = company_data["deadpooled_month"].to_s + "/" + company_data["deadpooled_day"].to_s + "/" + company_data["deadpooled_year"].to_s
+        c.dead_date = Date.new(company_data["deadpooled_year"].to_i, company_data["deadpooled_month"].to_i, company_data["deadpooled_day"].to_i)
       end
+
+      # Write in logic if the company is acquired...
 
       # Logic written in if there is no founded month or day to make it 1/1 of the year it was founded
       if (company_data["founded_year"] == nil)
           c.founded_date = nil
-        elsif (company_data["founded_month"] == nil)
-          c.founded_date = "1/1/" + company_data["founded_year"].to_s
-        else
-          c.founded_date = company_data["founded_month"].to_s + "/" + company_data["founded_day"].to_s + "/" + company_data["founded_year"].to_s
+      elsif (company_data["founded_month"] == nil)
+          c.founded_date = Date.new( company_data["founded_year"]   )
+      else
+          c.founded_date = Date.new( company_data["founded_year"], company_data["founded_month"], company_data["founded_day"] )
       end
+      # Note we are having the same problem with data like
+      # Twitter, Stripe, Asana, etc.'s Founded Date coming up
+      # as nil. On Crunchbase they are displayed as 06/08
+      # and it is consistent for each of them
+
+      # IMPORTANT - do we want t to save these date objects
+      # Or something else
 
 
-
+    end
 
 
 c.save
@@ -178,9 +185,11 @@ puts "There are #{Location.all.count} locations in the database"
         end
         f.funding_amount = round["raised_amount"]
         f.funding_currency = round["raised_currency_code"]
+
+        if round["funded_year"] == nil
         f.funding_date = round["funded_month"].to_s + "/" + round["funded_day"].to_s + "/" + round["funded_year"].to_s
 
-        #### !!!!! FUNDING ROUND DATE IS NOT SAVING FOR MANY OF THEM - NEED TO FIGURE OUT
+        # Funding_date is not saving for multiple instances of th
 
         f.save
         puts "There are #{Funding.all.count} funding rounds in the database"
