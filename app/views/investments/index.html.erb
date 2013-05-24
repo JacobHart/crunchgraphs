@@ -2,7 +2,8 @@
 
 <table>
   <tr>
-    <th>Funding</th>
+    <th>Funding ID </th>
+    <th>Co. Being Funded</th>
     <th>Company perma</th>
     <th>Company Id</th>
     <th>Financial perma</th>
@@ -17,7 +18,8 @@
 <% @investments.each do |investment| %>
   <tr>
     <td><%= investment.funding_id %></td>
-    <td><%= investment.company_perma %></td>
+    <td><%= investment.funding.company.name %></td>
+    <td><%= investment.company %></td>
     <td><%= investment.company_id %></td>
     <td><%= investment.financial_perma %></td>
     <td><%= investment.financial_id %></td>
