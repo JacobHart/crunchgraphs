@@ -119,7 +119,7 @@ companies.each_index do |i|
 
       if company_data["category_code"] == nil
          c.industry_id = Industry.first.id
-# -------- Y-Combinator Industry is nil and won't show up / save as other
+
         elsif Industry.find_by_name(company_data["category_code"]) == nil
 
           Industry.create(name: company_data["category_code"])
