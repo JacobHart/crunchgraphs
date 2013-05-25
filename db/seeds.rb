@@ -118,15 +118,15 @@ companies.each_index do |i|
 
 
       if company_data["category_code"] == nil
-        c.industry_id = Industry.find_by_name('other')
-
+         c.industry_id = Industry.find_by_id(1)
+# -------- Y-Combinator Industry is nil and won't show up / save as other
         elsif Industry.find_by_name(company_data["category_code"]) == nil
 
-         Industry.create(name: company_data["category_code"])
-         c.industry_id = Industry.find_by_name(company_data["category_code"]).id
+          Industry.create(name: company_data["category_code"])
+          c.industry_id = Industry.find_by_name(company_data["category_code"]).id
 
         else
-           c.industry_id = Industry.find_by_name(company_data["category_code"]).id
+          c.industry_id = Industry.find_by_name(company_data["category_code"]).id
 
       end
 
@@ -138,12 +138,13 @@ companies.each_index do |i|
       # Logic in case the company is dead
 
       if company_data["deadpooled_year"] == nil
-        c.dead_date = nil
-      elsif company_data["deadpooled_month"] == nil
-        c.dead_date = Date.new(company_data["deadpooled_year"])
-        # Add in another eslif to check and see if the day is nil
-      else
-        c.dead_date = Date.new(company_data["deadpooled_year"], company_data["deadpooled_month"], company_data["deadpooled_day"])
+          c.dead_date = nil
+        elsif company_data["deadpooled_month"] == nil
+          c.dead_date = Date.new(company_data["deadpooled_year"])
+        elsif company_data["deadpooled_data"] == nil
+          c.dead_date = Date.new(company_data["deadpooled_year"], company_data["deadpooled_month"])
+        else
+          c.dead_date = Date.new(company_data["deadpooled_year"], company_data["deadpooled_month"], company_data["deadpooled_day"])
       end
 
       # Write in logic if the company is acquired...
@@ -152,23 +153,6 @@ companies.each_index do |i|
       #
       #
       #
-
-      # begin
-      #   c.founded_date = Date.new( company_data["founded_year"], company_data["founded_month"], company_data["founded_day"] )
-      # rescue NoMethodError
-      #   begin
-      #     c.founded_date = Date.new( company_data["founded_year"], company_data["founded_month"] )
-      #   rescue NoMethodError
-      #     begin
-      #       c.founded_date = Date.new( company_data["founded_year"] )
-      #     rescue NoMethodError
-      #       c.founded_date = nil
-      #     end
-      #   end
-      # end
-
-      ##### Is the above a better way to write this logic below? ##### ------------------ TALK WITH BEN ABOUT
-
       if company_data["founded_year"] == nil
           c.founded_date = nil
       elsif company_data["founded_month"] == nil && company_data["founded_day"] == nil
@@ -179,10 +163,7 @@ companies.each_index do |i|
           c.founded_date = Date.new( company_data["founded_year"], company_data["founded_month"], company_data["founded_day"] )
       end
 
-      # Note we are having the same problem with data like Twitter, Stripe, Asana, etc.'s Founded Date coming up
-      # as nil. On Crunchbase they are displayed as 06/08 and it is consistent for each of them -------- TALK WITH BEN ABOUT
-
-      c.save
+    c.save!
 
 
       # Assumes that the first location is their headquarters

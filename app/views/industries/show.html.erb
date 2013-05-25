@@ -11,7 +11,7 @@
 
 <ul>
   <li><%= f.name %></li>
-      <% f.fundings.where(funding_code: 'a').each do |g|  %>
+      <% f.fundings.each do |g|  %>
       <ul>
         <li><%= g.funding_code %>: <%= g.funding_amount %></li>
       </ul>
