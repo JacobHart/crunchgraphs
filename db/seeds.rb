@@ -163,8 +163,8 @@ companies.each_index do |i|
           c.founded_date = Date.new( company_data["founded_year"], company_data["founded_month"], company_data["founded_day"] )
       end
 
-    c.save!
-
+    c.save
+#Jacob:  removed the ! from save
 
       # Assumes that the first location is their headquarters
       # Need to build in logic in case there is no location
